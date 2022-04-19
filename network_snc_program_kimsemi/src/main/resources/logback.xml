@@ -18,6 +18,10 @@
         <appender-ref ref="STDOUT"/>
     </logger>
 
+    <logger name="com.nhnacademy.edu.network.Receiver" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT_JUST_MSG"/>
+    </logger>
+
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
     </root>
