@@ -3,11 +3,8 @@ package com.nhnacademy.edu.network;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 public class Server {
-    private final Log log = LogFactory.getLog(Server.class);
     private final int port;
 
     public Server(int port) {
@@ -27,7 +24,7 @@ public class Server {
                     ClientSession client = new ClientSession(socket);
                     client.start();
                 } catch (IOException e) {
-                    log.error("client access fail" + e.getMessage());
+                    System.out.println(e.getMessage());
                 }
             }
         }
@@ -49,7 +46,7 @@ public class Server {
                 sender.start();
                 receiver.start();
             } catch (IOException e) {
-                log.error(e.getMessage());
+                System.out.println(e.getMessage());
             }
         }
     }

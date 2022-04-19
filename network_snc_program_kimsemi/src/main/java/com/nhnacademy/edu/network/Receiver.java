@@ -3,11 +3,8 @@ package com.nhnacademy.edu.network;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.Socket;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 public class Receiver extends Thread {
-    private final Log log = LogFactory.getLog(Receiver.class);
     private final DataInputStream in;
 
     public Receiver(Socket socket) throws IOException {
@@ -27,9 +24,9 @@ public class Receiver extends Thread {
 
     private void receiveMessage() {
         try {
-            log.info(in.readUTF());
+            System.out.println(in.readUTF());
         } catch (IOException e) {
-            log.error(e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 }

@@ -2,11 +2,8 @@ package com.nhnacademy.edu.network;
 
 import java.io.IOException;
 import java.net.Socket;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 public class Client {
-    private final Log log = LogFactory.getLog(Client.class);
     private final String hostName;
     private final int port;
 
@@ -25,7 +22,7 @@ public class Client {
             sender.start();
             receiver.start();
         }  catch (IOException e) {
-            log.error(e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 }
