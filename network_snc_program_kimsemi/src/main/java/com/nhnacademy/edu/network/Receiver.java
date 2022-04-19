@@ -16,6 +16,7 @@ public class Receiver extends Thread {
         while (isReceivable()) {
             receiveMessage();
         }
+        System.exit(-1);
     }
 
     private boolean isReceivable() {
@@ -24,7 +25,11 @@ public class Receiver extends Thread {
 
     private void receiveMessage() {
         try {
-            System.out.println(in.readUTF());
+            String output = in.readUTF();
+            if(output.equals("^c")){
+                System.exit(-1);
+            }
+            System.out.println(output);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

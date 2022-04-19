@@ -1,5 +1,6 @@
 package com.nhnacademy.edu.network;
 
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -30,24 +31,36 @@ public class Server {
         }
     }
 
-    public class ClientSession extends Thread {
+    public static class ClientSession extends Thread {
         private final Socket socket;
+        private final DataInputStream in;
 
-        ClientSession(Socket socket) {
+        ClientSession(Socket socket) throws IOException {
             this.socket = socket;
+            this.in = new DataInputStream(socket.getInputStream());
         }
 
         @Override
         public void run() {
-            try {
-                Thread sender = new Sender(this.socket);
-                Thread receiver = new Receiver(this.socket);
+            connect();
+        }
 
-                sender.start();
-                receiver.start();
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
+        private void connect() {
+            if (isConnect()) {
+                try {
+                    Thread sender = new Sender(this.socket);
+                    Thread receiver = new Receiver(this.socket);
+
+                    sender.start();
+                    receiver.start();
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
             }
+        }
+
+        private boolean isConnect() {
+            return this.in != null;
         }
     }
 }

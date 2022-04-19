@@ -30,6 +30,7 @@ public class Sender extends Thread {
             while (isSend()) {
                 String input = scanner.nextLine();
                 if(input.equals("^c")){
+                    this.out.writeUTF(input);
                     System.exit(-1);
                 }
                 this.out.writeUTF(input);
